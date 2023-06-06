@@ -1,4 +1,4 @@
-import LogoRaleigh from '../../assets/img-AboutUs/LogoRaleigh.jpg'
+/* import LogoRaleigh from '../../assets/img-AboutUs/LogoRaleigh.jpg'
 import LogoContinental from '../../assets/img-AboutUs/LogoContinental.jpg'
 import LogoShimano from '../../assets/img-AboutUs/LogoShimano.jpg'
 import LogoHaro from '../../assets/img-AboutUs/LogoHaro.jpg'
@@ -61,3 +61,4 @@ const AboutUs = () => {
 }
 
 export default AboutUs
+ */

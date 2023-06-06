@@ -1,4 +1,4 @@
-import Carousel from "better-react-carousel";
+/* import Carousel from "better-react-carousel";
 import ImgHero from '../../assets/img-hero/hero1.jpg'
 import ImgHero1 from '../../assets/img-hero/hero2.jpg'
 import ImgHero2 from '../../assets/img-hero/hero3.jpg'
@@ -49,4 +49,4 @@ const Hero = () => {
     )
 }
 
-export default Hero
+export default Hero */
