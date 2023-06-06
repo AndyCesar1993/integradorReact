@@ -1,7 +1,7 @@
 import { Routes as ReactDomRoutes, Route} from 'react-router-dom'
-//import Hero from '../components/Hero/Hero'
+import Hero from '../components/Hero/Hero'
 import Products from '../components/Podructs/Products'
-//import AboutUs from '../components/AboutUs/AboutUs'
+import AboutUs from '../components/AboutUs/AboutUs'
 import Contact from '../components/Contact/Contact'
 import PageNotFound from '../components/Pages/PageNotFound'
 import Layout from '../components/Layout/Layout'
@@ -13,9 +13,9 @@ const RoutesContainer = ()=> {
     return (
         <Layout>
             <ReactDomRoutes>
-                {/* <Route path="/" element={<Hero/>} /> */}
+                <Route path="/" element={<Hero/>} />
                 <Route path="/products" element={<Products/>} />
-               {/*  <Route path="/aboutUs" element={<AboutUs/>} /> */}
+                <Route path="/aboutUs" element={<AboutUs/>} />
                 <Route path="/contact" element={<Contact/>} />
                 <Route path="/shop" element={<Shop/>} />
                 <Route path="/login" element={<Login/>} />

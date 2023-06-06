@@ -1,4 +1,4 @@
-/* import { styled } from "styled-components";
+import { styled } from "styled-components";
 
 export const AboutUsStyle = styled.div`
     display: flex;
@@ -52,4 +52,4 @@ export const AbouUsInfoStyle = styled.div`
         }
     }
 
-` */
+`
