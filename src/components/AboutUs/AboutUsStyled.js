@@ -8,7 +8,7 @@ export const AboutUsStyle = styled.div`
     .AboutUsImg{
         width: 45%;
     }
-    @media (width < 770px){
+/*     @media (width < 770px){
         flex-direction: column-reverse;
         align-items: center;
         margin-top: 50px;
@@ -20,7 +20,7 @@ export const AboutUsStyle = styled.div`
         .AboutUsImg{
             width: 90%;
         }
-    }
+    } */
 `
 
 export const AbouUsInfoStyle = styled.div`
@@ -37,7 +37,7 @@ export const AbouUsInfoStyle = styled.div`
         width: 200px;
         height: 100px;
     }
-    @media (width< 770px){
+/*     @media (width< 770px){
         width: 80%;
         padding-top: 15px;
         h1{
@@ -50,6 +50,6 @@ export const AbouUsInfoStyle = styled.div`
         p{
             font-size: 15px;
         }
-    }
+    } */
 
 `

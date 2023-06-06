@@ -5,7 +5,7 @@ export const HeroStyle = styled.div`
     background: ${grayDark};
     margin-top: 50px;
     padding: 15px;
-    .imgHeroCarrousel{
+/*     .imgHeroCarrousel{
         width: 100%;
         height: 500px;
     }
@@ -19,5 +19,5 @@ export const HeroStyle = styled.div`
         .imgHeroCarrousel{
             height: 250px;
         }
-    }
+    } */
 `
