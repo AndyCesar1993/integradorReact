@@ -33,19 +33,11 @@ export const AbouUsInfoStyle = styled.div`
         font-size: 20px;
         text-align: center;
     }
-    .CarrouselItemImg{
-        width: 200px;
-        height: 100px;
-    }
     @media (width< 770px){
         width: 80%;
         padding-top: 15px;
         h1{
             font-size: 23px;
-        }
-        .CarrouselItemImg{
-            width: 100px;
-            height: 50px;
         }
         p{
             font-size: 15px;
