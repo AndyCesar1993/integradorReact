@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import ImgAboutUS from '../../assets/img-AboutUs/montainAndBike.jpg'
+import ImgAboutUS from '../../assets/montainAndBike.jpg'
 import { AbouUsInfoStyle, AboutUsStyle } from './AboutUsStyled'
 import {carrouselAboutUs} from '../Utils/arrayCarrousel'
 
