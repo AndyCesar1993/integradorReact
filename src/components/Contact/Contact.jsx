@@ -1,12 +1,3 @@
-import  Ahora12 from '../../assets/medios-de-pago/ahora12-icon.jpg'
-import  AmericanExpress from '../../assets/medios-de-pago/american-express-icon.png'
-import  BankTransfer from '../../assets/medios-de-pago/bank_transfer_in_icon.png'
-import  Cabal from '../../assets/medios-de-pago/cabal-icon.png'
-import  Mastercard from '../../assets/medios-de-pago/mastercard-icon.png'
-import  MP from '../../assets/medios-de-pago/mercado-pago-icon.png'
-import  PF from '../../assets/medios-de-pago/pagofacil-icon.png'
-import  RP from '../../assets/medios-de-pago/rapipago-icon.png'
-import  Visa from '../../assets/medios-de-pago/visa-icon.png'
 import FaceLogo from '../../assets/facebook-circled--v1.png'
 import InstaLogo from '../../assets/instagram-new--v1.png'
 import TwitterLogo from '../../assets/twitter--v3.png'
@@ -35,15 +26,15 @@ const Contact = () => {
             <PagosStyle>
                 <h2>Medios de Pago</h2>
                 <div>
-                    <img src={Ahora12} alt="Ahora 12" />
-                    <img src={BankTransfer} alt="transferencia bancaria" />
-                    <img src={MP} alt="Mercado Pago" />
-                    <img src={Visa} alt="Visa" />
-                    <img src={Mastercard} alt="Mastercard" />
-                    <img src={AmericanExpress} alt="American Express" />
-                    <img src={Cabal} alt="Cabal" />
-                    <img src={PF} alt="Pago Facil" />
-                    <img src={RP} alt="Rapi Pago" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/ahora12-icon_ezdcu2.jpg' alt="Ahora 12" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/bank_transfer_in_icon_lwdmaa.png' alt="transferencia bancaria" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/mercado-pago-icon_wgpocu.png' alt="Mercado Pago" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/visa-icon_ltqxvi.png' alt="Visa" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/mastercard-icon_egnnag.png' alt="Mastercard" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/american-express-icon_lvycr3.png' alt="American Express" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/cabal-icon_ata2t9.png' alt="Cabal" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/pagofacil-icon_pwcda3.png' alt="Pago Facil" />
+                    <img src='https://res.cloudinary.com/dyarz6hqx/image/upload/v1685294531/rapipago-icon_mp3fit.png' alt="Rapi Pago" />
                 </div>
             </PagosStyle>
             <MapStyle>
