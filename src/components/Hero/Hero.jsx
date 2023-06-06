@@ -15,7 +15,7 @@ const Hero = () => {
     return (
         <>
             <HeroStyle>
-                <Carousel cols={2} rows={1} gap={10} autoplay={2000} loop>
+                <Carousel cols={2} rows={1} gap={10} autoplay={2000} loop >
                     <Carousel.Item>
                         <img className="imgHeroCarrousel" src={ImgHero} />
                     </Carousel.Item>

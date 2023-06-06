@@ -14,7 +14,7 @@ const NavBar = () => {
     const ShopLength = useSelector((state) => state.shop.cartItems.length)
     const userLog = useSelector((state) => state.users.userLog)
     const isLogin = useSelector((state) => state.users.isLogin)
-    const [openNav, setOpenNav] = useState(false);
+    const [openNav, setOpenNav] = useState(true);
     const [open, setOpen] = useState(false);
 
     return (
