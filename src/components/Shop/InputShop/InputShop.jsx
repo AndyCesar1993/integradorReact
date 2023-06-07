@@ -1,14 +1,16 @@
 import { Autocomplete, Box, Button, MenuItem, Switch, TextField } from "@mui/material"
 import { ErrorShop, InputPhoneStyle, InputShopStyle } from "./InputShopStyled"
 import { useSelector } from "react-redux"
-import { formatPrice } from "../../Utils/UtilsConst"
+import { formatPrice, isEmpty } from "../../Utils/UtilsConst"
 import { countries } from "../../Utils/Countries"
 import { Payment } from "../../Utils/Payment"
 import { useEffect, useState } from "react"
-import { isEmpty } from "../../Utils/UtilsConst"
+import { useNavigate } from "react-router-dom"
 
 const InputShop = (props) => {
   const totalCost = useSelector((state) => state.shop.shipingCost);
+  const isLogin = useSelector((state) => state.users.isLogin)
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [country, setCountry] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,25 +25,29 @@ const InputShop = (props) => {
   const arrayCuotas = ['1', '3', '6', '12']
 
   const Buy = () => {
-    if(isEmpty(name)){
+    if (!isLogin) {
+      navigate('/login')
+      return
+  } if (isEmpty(name)) {
       setError('Por favor ingrese el nombre completo')
       return
-    }if(isEmpty(country)){
+  } if (isEmpty(country)) {
       setError('Por favor ingrese la ciudad')
       return
-    }if(isEmpty(phone)){
+  } if (isEmpty(phone)) {
       setError('Por favor ingrese su numero de telefono')
       return
-    }if(isEmpty(payment)){
+  } if (isEmpty(payment)) {
       setError('Por favor ingrese el medio de pago')
       return
-    }if(isEmpty(shypment)){
+  } if (isEmpty(shypment)) {
       setError('Por favor ingrese si desea envio')
       return
-    }else{
+  } else {
+      return true
       setError('');
       setOpenAlert(true);
-    }
+  }
   }
 
   return (
@@ -51,6 +57,7 @@ const InputShop = (props) => {
       <h2>Datos de Compra</h2>
       <ErrorShop>{error}</ErrorShop>
       <TextField
+        className="textField"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -83,9 +90,10 @@ const InputShop = (props) => {
           )}
           renderInput={(params) => (
             useEffect(()=> setCountry(params.inputProps.value)),
-            <TextField className="textField"
+            <TextField 
               {...params}
               label="Ciudad"
+              className="textField"
               inputProps={{
                 ...params.inputProps,
               }}
@@ -165,9 +173,9 @@ const InputShop = (props) => {
 
       {/* Input ubicacion */}
 
-      <TextField label="Ciudad" variant="outlined" disabled={envio} />
-      <TextField label="Direccion" variant="outlined" disabled={envio} />
-      <TextField label="Codigo Postal" variant="outlined" disabled={envio} />
+      <TextField className="textField" label="Ciudad" variant="outlined" disabled={envio} />
+      <TextField className="textField" label="Direccion" variant="outlined" disabled={envio} />
+      <TextField className="textField" label="Codigo Postal" variant="outlined" disabled={envio} />
 
       <Button variant="outlined" >$ {formatPrice(totalCost)}</Button>
       <Button
