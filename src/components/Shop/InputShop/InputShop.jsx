@@ -19,7 +19,7 @@ const InputShop = (props) => {
   const [cuotas, setCuotas] = useState(true);
   const [envio, setEnvio] = useState(true);
   const Shop = useSelector((state) => state.shop.cartItems);
-  const [error,setError] = useState('');
+  const [error, setError] = useState('');
   const { setOpenAlert } = props
 
   const arrayCuotas = ['1', '3', '6', '12']
@@ -28,26 +28,25 @@ const InputShop = (props) => {
     if (!isLogin) {
       navigate('/login')
       return
-  } if (isEmpty(name)) {
+    } if (isEmpty(name)) {
       setError('Por favor ingrese el nombre completo')
       return
-  } if (isEmpty(country)) {
+    } if (isEmpty(country)) {
       setError('Por favor ingrese la ciudad')
       return
-  } if (isEmpty(phone)) {
+    } if (isEmpty(phone)) {
       setError('Por favor ingrese su numero de telefono')
       return
-  } if (isEmpty(payment)) {
+    } if (isEmpty(payment)) {
       setError('Por favor ingrese el medio de pago')
       return
-  } if (isEmpty(shypment)) {
+    } if (isEmpty(shypment)) {
       setError('Por favor ingrese si desea envio')
       return
-  } else {
-      return true
+    } else {
       setError('');
       setOpenAlert(true);
-  }
+    }
   }
 
   return (
@@ -89,8 +88,8 @@ const InputShop = (props) => {
             </Box>
           )}
           renderInput={(params) => (
-            useEffect(()=> setCountry(params.inputProps.value)),
-            <TextField 
+            useEffect(() => setCountry(params.inputProps.value)),
+            <TextField
               {...params}
               label="Ciudad"
               className="textField"
