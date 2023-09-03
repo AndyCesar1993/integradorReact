@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,14 +6,17 @@ import Slide from '@mui/material/Slide';
 import { useDispatch } from 'react-redux';
 import { setMessage, setOpen } from '../../../Redux/succesfulMessageSlice';
 import InputShop from '../InputShop';
+import { forwardRef, useState } from 'react';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide() {
-    const [openAlert, setOpenAlert] = React.useState(false);
+export default function AlertDialogSlide(props) {
+    const [openAlert, setOpenAlert] = useState(false);
     const dispatch = useDispatch();
+    const {setLoading} = props
+
 
     const handleClose = (state) => {
         if(state){
@@ -26,11 +28,12 @@ export default function AlertDialogSlide() {
 
     return (
         <div>
-            <InputShop setOpenAlert={setOpenAlert} />
+            <InputShop setOpenAlert={setOpenAlert} setLoading={setLoading}/>
             <Dialog
                 open={openAlert}
                 TransitionComponent={Transition}
                 keepMounted
+                style={{zIndex:'2'}}
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >

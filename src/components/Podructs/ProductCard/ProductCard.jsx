@@ -23,7 +23,13 @@ const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel,
 
     const addProductToShop = () => {
         if(!existProductShop){
-            dispatch(addToShop(productToAdd))
+            dispatch(addToShop({
+                id: productToAdd.id,
+                price: productToAdd.price,
+                quantity: 1,
+                tittle: productToAdd.name,
+                img: productToAdd.img
+            }))
         }
     }
 

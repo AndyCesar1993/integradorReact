@@ -6,18 +6,20 @@ import succesfulMessageSlice from "./succesfulMessageSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
+import ordersSlice from "./ordersSlice";
 
 const reducers = combineReducers({
     products:productSlice,
     shop:shopSlice,
-    users:userSlice,
+    user:userSlice,
+    orders: ordersSlice,
     succesfuldMessage: succesfulMessageSlice
 });
 
 const persistConfig={
     key:'root',
     storage,
-    whitelist:['shop','users']
+    whitelist:['shop']
 }
 
 const persistedReducer = persistReducer(persistConfig,reducers);

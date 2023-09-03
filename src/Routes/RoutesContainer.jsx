@@ -8,6 +8,8 @@ import Layout from '../components/Layout/Layout'
 import Login from '../components/LoginRegister/Login/Login'
 import Register from '../components/LoginRegister/Register/Register'
 import Shop from '../components/Shop/Shop'
+import Validate from '../components/LoginRegister/Validate/Validate'
+import Orders from '../components/Orders/Orders'
 
 const RoutesContainer = ()=> {
     return (
@@ -20,6 +22,8 @@ const RoutesContainer = ()=> {
                 <Route path="/shop" element={<Shop/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
+                <Route path="/orders" element={<Orders/>} />
+                <Route path="/validate" element={<Validate/>} />
                 <Route path="/snak" element={<></>} />
 
                 <Route path="*" element={<PageNotFound/>} />

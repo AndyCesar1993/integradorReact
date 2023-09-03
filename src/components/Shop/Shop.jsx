@@ -1,15 +1,21 @@
-import { useSelector } from "react-redux"
 import Carrito from "./Carrito/Carrito"
-import InputShop from "./InputShop/InputShop"
 import { ShopStyle } from "./ShopStyled"
 import AlertDialogSlide from "./InputShop/CompletePayment/CompletePayment"
+import Animations from "../Utils/loading"
+import { useState } from "react"
 
 const Shop = () => {
+    const [loading, setLoading] = useState(false)
 
     return (
         <ShopStyle>
-            <Carrito/>
-            <AlertDialogSlide/>
+            {loading ?
+                <Animations/> :
+                <>
+                    <Carrito/>
+                    <AlertDialogSlide setLoading={setLoading}/>
+                </>
+            }
         </ShopStyle>
     )
 }

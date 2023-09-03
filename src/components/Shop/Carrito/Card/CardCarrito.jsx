@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addShipingCost, removeToShop, susShipingCost } from "../../../Redux/shopSlice"
 import { useState } from "react"
 
-const CardCarrito = ({ img, name, id, price }) => {
+const CardCarrito = ({ img, tittle, id, price }) => {
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
 
@@ -17,21 +17,21 @@ const CardCarrito = ({ img, name, id, price }) => {
 
     const increment = () => {
         setCount(count + 1);
-        dispatch(addShipingCost(price))
+        dispatch(addShipingCost({price,count,id}))
     };
     const decrement = () => {
         if (count > 1) {
             setCount(count - 1)
-            dispatch(susShipingCost(price))
+            dispatch(susShipingCost({price,count,id}))
         }
     };
 
 
     return (
         <ShopCardStyle>
-            <img src={img} alt={name} />
+            <img src={img} alt={tittle} />
             <InfoCardShopStyle>
-                <h3>{name}</h3>
+                <h3>{tittle}</h3>
                 <ButtonGroup variant="outlined" aria-label="outlined secondary  button group">
                     <Button onClick={decrement}>-</Button>
                     <Button>{count}</Button>

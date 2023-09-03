@@ -3,6 +3,8 @@ export const formatPrice = price => {
     return new Intl.NumberFormat().format(price);
 };
 
+export const URLBASE= "https://back-bike-store.vercel.app"
+
 
 /*Validation*/
 
@@ -21,3 +23,6 @@ export const passwordValid = (password) => passwordRequest.test(password);
 export const searchAvatar =(avatarName)=>avatars.find((avatar)=> avatar.name === avatarName);
 
 export const searchUser = (userName,users) => users.length? users.find((user)=>user.userName === userName):undefined;
+
+export const indexProduct =(array, id)=>array.findIndex((product)=>product.id === id)
+

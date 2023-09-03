@@ -9,7 +9,7 @@ export const HeaderStyle = styled.header`
     right: 0;
     left: 0;
     margin: 0;
-    z-index: 1;
+    z-index: 2;
     justify-content: space-around;
     align-items: center;
     padding:10px;
@@ -116,35 +116,15 @@ export const CountShopStyle = styled.small`
 `
 
 export const LoginStyle = styled.div`
-margin-right: 30px;
+margin-right: 10px;
+cursor: pointer;
     svg{
         color: white;
-    }
-    p{
-        cursor: pointer;
-    }
-    .UserIcon{
-        font-size: 30px;
-        cursor: pointer;
-    }
-    @media( width >700px) and (width < 800px){
-        p{
-            display: none;
-        }
+        font-size: 35px;
     }
     @media (width <500px){
         margin-right: 0;
     }
-`
-export const LoginAvatarStyle = styled.div`
-    color: white;
-    font-weight: 500;
-    display: flex;
-    gap:5px;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
 `
 
 

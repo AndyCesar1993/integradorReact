@@ -25,7 +25,7 @@ const CloseSeccion = (props) => {
             top: '0',
             right: '0',
             width: '100%',
-            zIndex: '2',
+            zIndex: '3',
         }} in={open}>
             <Alert className='alert'
                 action={

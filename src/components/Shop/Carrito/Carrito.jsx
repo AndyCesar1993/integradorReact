@@ -5,7 +5,6 @@ import { ErrorStyle } from "../../Podructs/ProductsStyle"
 
 const Carrito = () => {
     const Shop = useSelector((state)=>state.shop.cartItems)
-    const productShop = Shop.map((product)=>product)
 
     return (
         <CarritoStyle>

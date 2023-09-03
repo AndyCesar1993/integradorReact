@@ -1,21 +1,22 @@
 import Box from '@mui/material/Box';
-import { CountShopStyle, HeaderStyle, LoginAvatarStyle, LoginStyle, LogoStyle, NavStyle } from './NavBarStyled';
+import { CountShopStyle, HeaderStyle, LoginStyle, LogoStyle, NavStyle } from './NavBarStyled';
 import BikeLogo from '../../assets/logo bike.png';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import CloseSeccion from './CloseSeccion/CloseSeccion';
+import DataUser from './dataUser/dataUser';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 const NavBar = () => {
     const ShopLength = useSelector((state) => state.shop.cartItems.length)
-    const userLog = useSelector((state) => state.users.userLog)
-    const isLogin = useSelector((state) => state.users.isLogin)
+    const userLog = useSelector((state) => state.user.user)
+    const isLogin = useSelector((state) => state.user.isLogin)
     const [openNav, setOpenNav] = useState(true);
     const [open, setOpen] = useState(false);
+    const [userData, setUserData] = useState(false)
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -28,7 +29,7 @@ const NavBar = () => {
                 </LogoStyle>
 
                 <NavStyle open={openNav}>
-                    <ul onClick={()=> setOpenNav(!openNav)}>
+                    <ul onClick={() => setOpenNav(!openNav)}>
                         <li><Link to='/'>Inicio</Link></li>
                         <li><Link to='products'>Productos</Link></li>
                         <li><Link to='aboutUs'>Nosotros</Link></li>
@@ -40,19 +41,21 @@ const NavBar = () => {
                 </NavStyle>
 
                 <LoginStyle>
-                    {isLogin ?
-                        <LoginAvatarStyle>
-                            <PersonRemoveIcon onClick={() => setOpen(true)} className='UserIcon'/>
-                            <p onClick={() => setOpen(true)}>{userLog.userName}</p>
-                        </LoginAvatarStyle>
-                        : <Link to='/login'>
-                            <PersonAddIcon className='UserIcon' />
-                        </Link>}
+                    <AccountCircleIcon
+                        onClick={()=>setUserData(!userData)}
+                    />
                 </LoginStyle>
 
-                <MenuIcon className='menuIcon' onClick={()=> setOpenNav(!openNav)} />
+                <MenuIcon className='menuIcon' onClick={() => setOpenNav(!openNav)} />
 
             </HeaderStyle>
+
+            {userData ?
+                <DataUser setUserData={setUserData} setOpen={setOpen} /> :
+                <></>
+            }
+
+
         </Box>
     )
 }

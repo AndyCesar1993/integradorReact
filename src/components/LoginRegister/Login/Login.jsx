@@ -1,62 +1,93 @@
-import { DontUserStyle, ErrorLogin, IconsStyle, InputDivStyle, LoginStyle, SubmitStyle } from "./LoginStyled"
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonIcon from '@mui/icons-material/Person';
-import KeyIcon from '@mui/icons-material/Key';
+import { DontUserStyle, ErrorLogin, LoginStyle } from "./LoginStyled"
+import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isEmpty, searchUser } from "../../Utils/UtilsConst";
 import { logUser } from "../../Redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import { setMessage, setOpen } from "../../Redux/succesfulMessageSlice";
+import { Button, TextField } from "@mui/material";
+import { loginUser } from "../../../axios/axiosUSer";
+import Animations from "../../Utils/loading";
+
 
 const Login = () => {
-    const [userName,setUsername]=useState('');
-    const [password,setPassword]=useState('');
-    const [error,setError]=useState('');
-    const users = useSelector((state)=>state.users.users);
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const submitLogin = e=>{
+    const handleChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const submitLogin = async (e) => {
         e.preventDefault();
-        let user= searchUser(userName,users)
-        if(isEmpty(userName)){
-            setError('El usuario es obligatorio!')
-            return
-        }if(!user){
-            setError('El nombre de usuario no existe!')
-            return
-        }if(user.password !== password){
-            setError('La contraseña es incorrecta!')
-        }else{
-            dispatch(setMessage('Registrado Correctamente'))
-            dispatch(logUser(user));
-            dispatch(setOpen(true))
-            setUsername('');
-            setPassword('');
-            navigate('/');
+
+        setLoading(true)
+
+        const data = await loginUser(user.username, user.password)
+
+        setLoading(false)
+
+        if(data.user){
+            setError("")
         }
+
+        if(data.errors){
+            setError(data.errors[0].msg)
+            return
+        }
+
+        if(data.msg){
+            setError(data.msg)
+            return
+        } 
+
+        else{
+            setError(data.msg)
+            dispatch(setMessage('Logeado Correctamente'))
+            dispatch(logUser(data));
+            dispatch(setOpen(true));
+            navigate('/');
+            return
+        }
+
     }
 
     return (
         <LoginStyle>
-            <section>
-                <AccountCircleIcon style={{fontSize:'100px'}}/>
-                <h1>LOGIN</h1>
-                <ErrorLogin>{error}</ErrorLogin>
-                <form onSubmit={submitLogin}>
-                    <InputDivStyle>
-                    <IconsStyle><PersonIcon /></IconsStyle>
-                        <input value={userName} onChange={(e)=>setUsername(e.target.value)} type="text" name="user-name" id="user-name" placeholder="user-name" />
-                    </InputDivStyle>
-                    <InputDivStyle>
-                        <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" name="password" id="password" placeholder="password" />
-                        <IconsStyle><KeyIcon /></IconsStyle>
-                    </InputDivStyle>
-                    <DontUserStyle to='/register'>¿No posee usuario?</DontUserStyle>
-                    <SubmitStyle type="submit" value="ENVIAR" />
-                </form>
-            </section>
+            {loading ?
+                <Animations /> :
+                <section>
+                    <h1>LOGIN</h1>
+                    <ErrorLogin>{error}</ErrorLogin>
+                    <form onSubmit={submitLogin}>
+                        <TextField id="user-name" label="user-name" variant="outlined" value={user.username} name="username"
+                            InputLabelProps={{ shrink: true, }}
+                            onChange={(e) => handleChange(e)}
+                        />
+
+                        <TextField id="password" label="password" variant="outlined" type="password" value={user.password} name="password"
+                            InputLabelProps={{ shrink: true, }}
+                            onChange={(e) => handleChange(e)}
+                        />
+
+                        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                            Send
+                        </Button>
+
+                        <DontUserStyle to='/register'>¿No posee usuario?</DontUserStyle>
+                    </form>
+                </section>
+            }
+
         </LoginStyle>
     )
 }

@@ -1,94 +1,157 @@
-import { ErrorRegister, InputContRegister, InputLeftRegister, InputRightRegister, RegisterStyle } from "./RegisterStyled"
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonIcon from '@mui/icons-material/Person';
-import { Email, Key } from "@mui/icons-material";
-import { IconsStyle, SubmitStyle } from "../Login/LoginStyled";
+import { ErrorRegister, RegisterStyle, InputsContainerStyle } from "./RegisterStyled"
+import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
-import { isBetween, emailValid, passwordValid, searchUser, } from '../../Utils/UtilsConst'
-import { useDispatch, useSelector } from "react-redux";
-import { logUser, regUser } from "../../Redux/userSlice";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setMessage, setOpen } from "../../Redux/succesfulMessageSlice";
-
+import { Button, TextField } from "@mui/material";
+import { createUser } from "../../../axios/axiosUSer";
+import Animations from "../../Utils/loading";
+import moment from "moment";
 
 
 const Register = () => {
-    const [name, setName] = useState('')
-    const [userName, setUserName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordAgain, setPasswordAgain] = useState('')
-    const [error, setError] = useState('')
-    const dispatch = useDispatch();
-    const users = useSelector((state) => state.users.users)
+    const [data, setData] = useState({
+        name: "",
+        username: "",
+        dateOfBirth: moment(Date.now()).format('yyyy-MM-DD'),
+        email: "",
+        password: "",
+        passwordAgain: ""
+    });
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
-    const sendRegister = (e) => {
+
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        });
+    };
+
+
+    const sendRegister = async (e) => {
         e.preventDefault();
-        if (!isBetween(name.length, 3, 30)) {
-            setError('El nombre debe tener entre 3 y 30 caracteres')
+        const date = Number(moment(data.dateOfBirth).format('DDMMYYYY'))
+
+        if (data.password != data.passwordAgain) {
+            setError({ msg: "Las contraseñas no coinciden", path: "passwords" })
             return
-        } if (!isBetween(name.length, 3, 20)) {
-            setError(' El nombre de usuario debe tener entre 3 y 20 caracteres')
+        }
+
+        setLoading(true)
+
+        const user = await createUser(data.name, data.username, date, data.email, data.password)
+        setLoading(false)
+
+
+        if(user.errors){
+            setError(user.errors[0])
             return
-        } if (searchUser(userName, users)) {
-            setError('El UserName no esta disponible')
-            return
-        } if (!emailValid(email)) {
-            setError("El Email es invalido!");
-            return
-        } if (!passwordValid(password)) {
-            setError("La contraseña debe ser alfanumerica,contener al menos un simbolo y una Mayuscula!");
-            return
-        } if (password !== passwordAgain) {
-            setError("Las contraseñas no coinciden!");
+        }
+
+        if (user === "userRegister") {
+            dispatch(setMessage(`El usuario ya se encuentra registrado. Se envió nuevamente código de verificación a ${data.email}`));
+            dispatch(setOpen(true));
+            setData({
+                name: "",
+                username: "",
+                email: "",
+                password: "",
+                passwordAgain: ""
+            })
+            navigate('/validate');
             return
         } else {
-            dispatch(setMessage('Registrado Correctamente'))
-            dispatch(setOpen(true))
-            dispatch(regUser({ name: name, userName: userName, email: email, password: password}))
-            dispatch(logUser({ name: name, userName: userName, email: email, password: password}))
-            dispatch(setOpen(true))
-            setName('')
-            setUserName('')
-            setEmail('')
-            setPassword('')
-            setPasswordAgain('')
-            navigate('/');
+            dispatch(setMessage(user.msg));
+            dispatch(setOpen(true));
+            setData({
+                name: "",
+                username: "",
+                email: "",
+                password: "",
+                passwordAgain: ""
+            })
+            navigate('/validate');
         }
+
+
+
     }
 
     return (
         <RegisterStyle>
-            <section>
-                <AccountCircleIcon style={{ fontSize: '100px' }} />
-                <h1>REGISTER</h1>
-                <ErrorRegister>{error}</ErrorRegister>
-                <form onSubmit={sendRegister}>
-                    <InputContRegister>
-                        <InputRightRegister onChange={(e) => setName(e.target.value)} value={name} type="text" name="name" placeholder="name" />
-                        <IconsStyle><PersonIcon /></IconsStyle>
-                    </InputContRegister>
-                    <InputContRegister>
-                        <IconsStyle><PersonIcon /></IconsStyle>
-                        <InputLeftRegister onChange={(e) => setUserName(e.target.value.toLowerCase())} value={userName} type="text" name="user-name" placeholder="user-name" />
-                    </InputContRegister>
-                    <InputContRegister>
-                        <InputRightRegister onChange={(e) => setEmail(e.target.value)} value={email} type="text" name="email" placeholder="email" />
-                        <IconsStyle><Email /></IconsStyle>
-                    </InputContRegister>
-                    <InputContRegister>
-                        <IconsStyle><Key /></IconsStyle>
-                        <InputLeftRegister onChange={(e) => setPassword(e.target.value.trim())} value={password} type="password" name="password" placeholder="password" />
-                    </InputContRegister>
-                    <InputContRegister>
-                        <InputRightRegister onChange={(e) => setPasswordAgain(e.target.value.trim())} value={passwordAgain} type="password" name="password-again" placeholder="password" />
-                        <IconsStyle><Key /></IconsStyle>
-                    </InputContRegister>
-                    <SubmitStyle type="submit" value="SEND" />
-                </form>
-            </section>
+            {loading ?
+                <Animations /> :
+                <section>
+                    <h1>REGISTER</h1>
+                    <ErrorRegister>{
+                        error ?
+                                error.msg
+                            : null}
+                    </ErrorRegister>
+
+                    <form onSubmit={sendRegister}>
+                        <div>
+                            <InputsContainerStyle>
+                                <TextField id="full-name" label="full-name" variant="outlined"
+                                    InputLabelProps={{ shrink: true, }}
+                                    onChange={(e) => handleChange(e)} value={data.name}
+                                    name="name"
+                                    
+                                />
+
+                                <TextField id="user-name" label="user-name" variant="outlined"
+                                    InputLabelProps={{ shrink: true, }}
+                                    onChange={(e) => handleChange(e)} value={data.username}
+                                    name="username"
+                                    
+                                />
+
+                                <TextField id="date-of-birth" type="date" variant="outlined"
+                                    InputLabelProps={{ shrink: true, }} label="date of birth"
+                                    onChange={(e) => handleChange(e)} value={data.dateOfBirth}
+                                    name="dateOfBirth"
+                                    
+                                />
+                            </InputsContainerStyle>
+
+                            <InputsContainerStyle>
+                                <TextField id="email" label="email" type="email" variant="outlined"
+                                    InputLabelProps={{ shrink: true, }}
+                                    onChange={(e) => handleChange(e)} value={data.email}
+                                    name="email"
+                                    
+                                />
+
+                                <TextField id="password" label="password" variant="outlined" type="password"
+                                    InputLabelProps={{ shrink: true, }}
+                                    onChange={(e) => handleChange(e)} value={data.password}
+                                    name="password"
+                                    
+                                />
+
+                                <TextField id="passwordRepeat" label="password" variant="outlined" type="password"
+                                    InputLabelProps={{ shrink: true, }}
+                                    onChange={(e) => handleChange(e)} value={data.passwordAgain}
+                                    name="passwordAgain"
+                                    
+                                />
+                            </InputsContainerStyle>
+                        </div>
+                        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                            Send
+                        </Button>
+
+                    </form>
+                </section>
+            }
         </RegisterStyle>
+
+
     )
 }
 
