@@ -6,7 +6,7 @@ import { verifyUser } from "../../../axios/axiosUSer";
 import { useDispatch } from "react-redux";
 import { setMessage, setOpen } from "../../Redux/succesfulMessageSlice";
 import { useNavigate } from "react-router-dom";
-import Animations from "../../Utils/loading";
+import { setLoading } from "../../Redux/loadingSlice"
 
 
 const Validate = () => {
@@ -15,7 +15,6 @@ const Validate = () => {
     code: ""
   })
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,12 +29,11 @@ const Validate = () => {
   const verifytiUser = async (e) => {
     e.preventDefault();
 
-    setLoading(true)
+    dispatch(setLoading(true))
 
-    const validate = await verifyUser(data.email, data.code)
+    const validate = await verifyUser(data.email.toLowerCase(), data.code)
 
-    setLoading(false)
-
+    dispatch(setLoading(false))
 
     if (!validate.errors) {
       dispatch(setMessage(validate.msg));
@@ -60,40 +58,34 @@ const Validate = () => {
   return (
     <ValidateContainerStyle>
 
-      {loading ?
-        <Animations /> :
-        <>
+      <h2>Por favor ingrese el codigo que le enviamos al email para validar su usuario</h2>
 
-          <h2>Por favor ingrese el codigo que le enviamos al email para validar su usuario</h2>
-
-          <InputValidateStyle onSubmit={verifytiUser}>
+      <InputValidateStyle onSubmit={verifytiUser}>
 
 
-            <ErrorValidate>
-              {error ?
-                error.length ?
-                  <li>{error[0].msg}</li> :
-                  <li>{error.msg}</li> :
-                null
-              }
-            </ErrorValidate>
+        <ErrorValidate>
+          {error ?
+            error.length ?
+              <li>{error[0].msg}</li> :
+              <li>{error.msg}</li> :
+            null
+          }
+        </ErrorValidate>
 
 
-            <TextField id="email" type="email" label="email" variant="outlined"
-              onChange={(e) => handleChange(e)} value={data.email} name="email"
-            />
+        <TextField id="email" type="email" label="email" variant="outlined"
+          onChange={(e) => handleChange(e)} value={data.email} name="email"
+        />
 
-            <TextField id="codigo" label="Codigo" variant="outlined"
-              onChange={(e) => handleChange(e)} value={data.code} name="code"
-            />
+        <TextField id="codigo" label="Codigo" variant="outlined"
+          onChange={(e) => handleChange(e)} value={data.code} name="code"
+        />
 
-            <Button variant="contained" type="submit" endIcon={<SendIcon />}>
-              Send
-            </Button>
+        <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          Send
+        </Button>
 
-          </InputValidateStyle>
-        </>
-      }
+      </InputValidateStyle>
 
     </ValidateContainerStyle>
   )

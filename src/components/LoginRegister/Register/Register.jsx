@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setMessage, setOpen } from "../../Redux/succesfulMessageSlice";
 import { Button, TextField } from "@mui/material";
 import { createUser } from "../../../axios/axiosUSer";
-import Animations from "../../Utils/loading";
+import { setLoading } from "../../Redux/loadingSlice"
 import moment from "moment";
 
 
@@ -20,7 +20,6 @@ const Register = () => {
         passwordAgain: ""
     });
     const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -42,13 +41,13 @@ const Register = () => {
             return
         }
 
-        setLoading(true)
+        dispatch(setLoading(true))
 
-        const user = await createUser(data.name, data.username, date, data.email, data.password)
-        setLoading(false)
+        const user = await createUser(data.name, data.username, date, data.email.toLowerCase(), data.password)
 
+        dispatch(setLoading(false))
 
-        if(user.errors){
+        if (user.errors) {
             setError(user.errors[0])
             return
         }
@@ -84,71 +83,68 @@ const Register = () => {
 
     return (
         <RegisterStyle>
-            {loading ?
-                <Animations /> :
-                <section>
-                    <h1>REGISTER</h1>
-                    <ErrorRegister>{
-                        error ?
-                                error.msg
-                            : null}
-                    </ErrorRegister>
+            <section>
+                <h1>REGISTER</h1>
+                <ErrorRegister>{
+                    error ?
+                        error.msg
+                        : null}
+                </ErrorRegister>
 
-                    <form onSubmit={sendRegister}>
-                        <div>
-                            <InputsContainerStyle>
-                                <TextField id="full-name" label="full-name" variant="outlined"
-                                    InputLabelProps={{ shrink: true, }}
-                                    onChange={(e) => handleChange(e)} value={data.name}
-                                    name="name"
-                                    
-                                />
+                <form onSubmit={sendRegister}>
+                    <div>
+                        <InputsContainerStyle>
+                            <TextField id="full-name" label="full-name" variant="outlined"
+                                InputLabelProps={{ shrink: true, }}
+                                onChange={(e) => handleChange(e)} value={data.name}
+                                name="name"
 
-                                <TextField id="user-name" label="user-name" variant="outlined"
-                                    InputLabelProps={{ shrink: true, }}
-                                    onChange={(e) => handleChange(e)} value={data.username}
-                                    name="username"
-                                    
-                                />
+                            />
 
-                                <TextField id="date-of-birth" type="date" variant="outlined"
-                                    InputLabelProps={{ shrink: true, }} label="date of birth"
-                                    onChange={(e) => handleChange(e)} value={data.dateOfBirth}
-                                    name="dateOfBirth"
-                                    
-                                />
-                            </InputsContainerStyle>
+                            <TextField id="user-name" label="user-name" variant="outlined"
+                                InputLabelProps={{ shrink: true, }}
+                                onChange={(e) => handleChange(e)} value={data.username}
+                                name="username"
 
-                            <InputsContainerStyle>
-                                <TextField id="email" label="email" type="email" variant="outlined"
-                                    InputLabelProps={{ shrink: true, }}
-                                    onChange={(e) => handleChange(e)} value={data.email}
-                                    name="email"
-                                    
-                                />
+                            />
 
-                                <TextField id="password" label="password" variant="outlined" type="password"
-                                    InputLabelProps={{ shrink: true, }}
-                                    onChange={(e) => handleChange(e)} value={data.password}
-                                    name="password"
-                                    
-                                />
+                            <TextField id="date-of-birth" type="date" variant="outlined"
+                                InputLabelProps={{ shrink: true, }} label="date of birth"
+                                onChange={(e) => handleChange(e)} value={data.dateOfBirth}
+                                name="dateOfBirth"
 
-                                <TextField id="passwordRepeat" label="password" variant="outlined" type="password"
-                                    InputLabelProps={{ shrink: true, }}
-                                    onChange={(e) => handleChange(e)} value={data.passwordAgain}
-                                    name="passwordAgain"
-                                    
-                                />
-                            </InputsContainerStyle>
-                        </div>
-                        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-                            Send
-                        </Button>
+                            />
+                        </InputsContainerStyle>
 
-                    </form>
-                </section>
-            }
+                        <InputsContainerStyle>
+                            <TextField id="email" label="email" type="email" variant="outlined"
+                                InputLabelProps={{ shrink: true, }}
+                                onChange={(e) => handleChange(e)} value={data.email}
+                                name="email"
+
+                            />
+
+                            <TextField id="password" label="password" variant="outlined" type="password"
+                                InputLabelProps={{ shrink: true, }}
+                                onChange={(e) => handleChange(e)} value={data.password}
+                                name="password"
+
+                            />
+
+                            <TextField id="passwordRepeat" label="password" variant="outlined" type="password"
+                                InputLabelProps={{ shrink: true, }}
+                                onChange={(e) => handleChange(e)} value={data.passwordAgain}
+                                name="passwordAgain"
+
+                            />
+                        </InputsContainerStyle>
+                    </div>
+                    <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                        Send
+                    </Button>
+
+                </form>
+            </section>
         </RegisterStyle>
 
 

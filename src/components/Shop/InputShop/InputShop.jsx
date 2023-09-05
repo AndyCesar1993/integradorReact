@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react"
-import { Autocomplete, Box, Button, MenuItem, Switch, TextField } from "@mui/material"
+import { Autocomplete, Box, Button, TextField } from "@mui/material"
 import { ErrorShop, InputPhoneStyle, InputShopStyle } from "./InputShopStyled"
 import { useDispatch, useSelector } from "react-redux"
-import { formatPrice, isEmpty } from "../../Utils/UtilsConst"
+import { formatPrice } from "../../Utils/UtilsConst"
 import { countries } from "../../Utils/Countries"
 import { useNavigate } from "react-router-dom"
 import { createOrder } from "../../../axios/axiosOrder"
 import { cleanShop } from "../../Redux/shopSlice"
+import { setLoading } from "../../Redux/loadingSlice"
 
-const InputShop = ({ setOpenAlert, setLoading  }) => {
+const InputShop = ({ setOpenAlert }) => {
 
   let shippingCost = 15000
+
+
   const [shippingDetails, setshippingDetails] = useState({
     name: "",
     cellphone: "",
@@ -18,8 +21,8 @@ const InputShop = ({ setOpenAlert, setLoading  }) => {
     adress: "",
     cp: ""
   })
-  const[hola, setHola]= useState("hola")
-  const [error, seterror] = useState('asdasd');
+
+  const [error, seterror] = useState('');
   const navigate = useNavigate();
   const [country, setCountry] = useState('');
   const dispatch = useDispatch();
@@ -35,38 +38,32 @@ const InputShop = ({ setOpenAlert, setLoading  }) => {
     })
   }
 
-  console.log(hola)
-
-  const Buy = async () => {
+  const buy = async () => {
     let totalPrice = shippingCost + totalCost
 
-    if (isLogin) {
-      setLoading(true)
+    if (!isLogin) {
+      navigate('/login')
+      return
+    }
 
-      const data = await createOrder(totalCost, shippingCost, totalPrice, shippingDetails, Shop, userToken)
+    dispatch(setLoading(true))
 
-      setLoading(false)
-      seterror('')
-      setHola('chau')
-      console.log(hola)
+    const data = await createOrder(totalCost, shippingCost, totalPrice, shippingDetails, Shop, userToken);
 
+    dispatch(setLoading(false))
+    
+    if (data.order) {
+      setOpenAlert(true)
+      seterror("")
+      dispatch(cleanShop())
+      return
+    }
 
-/*       if (data.order) {
-        console.log('asdasd')
-        setOpenAlert(true)
-        seterror("")
-        dispatch(cleanShop())
-        return
-      } */
-
-/*       if(data.response.data.errors){
-        seterror('data.response.data.errors[0].msg')
-        console.log(error)
-        return
-      } */
-
-    } else navigate('/login')
-
+    if (data.response.data.errors) {
+      seterror(data.response.data.errors[0].msg)
+      console.log(error)
+      return
+    }
 
   }
 
@@ -135,11 +132,11 @@ const InputShop = ({ setOpenAlert, setLoading  }) => {
 
       <Button variant="outlined">Total $ {formatPrice(totalCost)}</Button>
       <Button
-        onClick={Buy}
+        onClick={buy}
         variant="contained" href="#contained-buttons"
         disabled={
-          Shop.length? 
-          false : true
+          Shop.length ?
+            false : true
         }
       >COMPRAR</Button>
     </InputShopStyle>

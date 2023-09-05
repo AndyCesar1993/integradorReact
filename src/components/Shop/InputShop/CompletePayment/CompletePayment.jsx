@@ -12,10 +12,9 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide(props) {
+export default function AlertDialogSlide() {
     const [openAlert, setOpenAlert] = useState(false);
     const dispatch = useDispatch();
-    const {setLoading} = props
 
 
     const handleClose = (state) => {
@@ -28,7 +27,7 @@ export default function AlertDialogSlide(props) {
 
     return (
         <div>
-            <InputShop setOpenAlert={setOpenAlert} setLoading={setLoading}/>
+            <InputShop setOpenAlert={setOpenAlert}/>
             <Dialog
                 open={openAlert}
                 TransitionComponent={Transition}

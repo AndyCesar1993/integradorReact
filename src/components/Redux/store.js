@@ -7,13 +7,15 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
 import ordersSlice from "./ordersSlice";
+import loadingSlice from "./loadingSlice";
 
 const reducers = combineReducers({
     products:productSlice,
     shop:shopSlice,
     user:userSlice,
     orders: ordersSlice,
-    succesfuldMessage: succesfulMessageSlice
+    succesfuldMessage: succesfulMessageSlice,
+    loading: loadingSlice
 });
 
 const persistConfig={
