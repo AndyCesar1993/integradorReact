@@ -31,10 +31,8 @@ const Layout = ({ children }) => {
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>
             <NavBar />
-            {loading ?
-                <Animations /> :
                 <LayoutStyle>{children}</LayoutStyle>
-            }
+                <Animations loading={loading}/> 
             <Footer />
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>

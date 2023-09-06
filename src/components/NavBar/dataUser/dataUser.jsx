@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -12,6 +11,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import { setOrders } from '../../Redux/ordersSlice';
 import { getOrders } from '../../../axios/axiosOrder'
+import PersonIcon from '@mui/icons-material/Person';
+import PortraitIcon from '@mui/icons-material/Portrait';
+import EmailIcon from '@mui/icons-material/Email';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 
 
@@ -43,6 +46,7 @@ export default function DataUser({ setOpen, setUserData }) {
                     </ListItem>
 
                     <ListItem disablePadding>
+                        <PersonIcon />
                         <ListItemButton>
                             <ListItemText primary={username} />
                         </ListItemButton>
@@ -51,6 +55,7 @@ export default function DataUser({ setOpen, setUserData }) {
                     <Divider />
 
                     <ListItem disablePadding>
+                        <PortraitIcon />
                         <ListItemButton>
                             <ListItemText primary={name} />
                         </ListItemButton>
@@ -59,6 +64,7 @@ export default function DataUser({ setOpen, setUserData }) {
                     <Divider />
 
                     <ListItem disablePadding>
+                        <EmailIcon />
                         <ListItemButton>
                             <ListItemText primary={email} />
                         </ListItemButton>
@@ -69,7 +75,9 @@ export default function DataUser({ setOpen, setUserData }) {
                     <ListItem disablePadding
                         onClick={openOrders}
                     >
+                        <ShoppingCartCheckoutIcon />
                         <ListItemButton component="a" >
+
                             <ListItemText primary='My orders' />
                         </ListItemButton>
                     </ListItem>
@@ -77,7 +85,7 @@ export default function DataUser({ setOpen, setUserData }) {
                     <Divider />
 
                     <ListItemButton
-                        onClick={() => { setOpen(true), setUserData(false)} }
+                        onClick={() => { setOpen(true), setUserData(false) }}
                     >
                         <ListItemIcon>
                             <SendIcon />

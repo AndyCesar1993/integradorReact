@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setMessage, setOpen } from '../../../Redux/succesfulMessageSlice';
 import InputShop from '../InputShop';
 import { forwardRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +16,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 export default function AlertDialogSlide() {
     const [openAlert, setOpenAlert] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const handleClose = (state) => {
@@ -22,6 +24,7 @@ export default function AlertDialogSlide() {
             dispatch(setMessage('Compra realizada exitosamente!'))
             dispatch(setOpen(true))
             setOpenAlert(false)
+            navigate('/')
         }else setOpenAlert(false)
     }
 
@@ -36,7 +39,7 @@ export default function AlertDialogSlide() {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>{"Continuar con la compra?"}</DialogTitle>
+                <DialogTitle>{"¿Desea completar la compra?"}</DialogTitle>
                 <DialogActions>
                     <Button onClick={()=>handleClose(true)}>Continuar</Button>
                     <Button onClick={()=>handleClose(false)}>Cancelar</Button>

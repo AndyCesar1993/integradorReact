@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
-import { CountShopStyle, HeaderStyle, LoginStyle, LogoStyle, NavStyle } from './NavBarStyled';
+import { CountShopStyle, HeaderStyle, LoginStyle, LogoStyle, NavStyle, MenuIconStyle } from './NavBarStyled';
 import BikeLogo from '../../assets/logo bike.png';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import CloseSeccion from './CloseSeccion/CloseSeccion';
@@ -11,18 +11,17 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 const NavBar = () => {
-    const ShopLength = useSelector((state) => state.shop.cartItems.length)
-    const userLog = useSelector((state) => state.user.user)
-    const isLogin = useSelector((state) => state.user.isLogin)
+    const ShopLength = useSelector((state) => state.shop.cartItems.length);
     const [openNav, setOpenNav] = useState(true);
     const [open, setOpen] = useState(false);
-    const [userData, setUserData] = useState(false)
+    const [userData, setUserData] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <Box sx={{ width: '100%' }}>
             <CloseSeccion open={open} setOpen={setOpen} />
             <HeaderStyle>
-                <LogoStyle>
+                <LogoStyle onClick={() => { navigate('/') }}>
                     <h3>Bike</h3>
                     <img src={BikeLogo} alt="logo bike" />
                     <h3>Store</h3>
@@ -42,11 +41,14 @@ const NavBar = () => {
 
                 <LoginStyle>
                     <AccountCircleIcon
-                        onClick={()=>setUserData(!userData)}
+                        onClick={() => setUserData(!userData)}
                     />
                 </LoginStyle>
 
-                <MenuIcon className='menuIcon' onClick={() => setOpenNav(!openNav)} />
+                <MenuIconStyle onClick={() => setOpenNav(!openNav)}>
+                    <MenuIcon/>
+                    {ShopLength > 0 ? <CountShopStyle className='CountShop'>{ShopLength}</CountShopStyle> : <></>}
+                </MenuIconStyle>
 
             </HeaderStyle>
 

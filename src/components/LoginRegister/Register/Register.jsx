@@ -47,21 +47,17 @@ const Register = () => {
 
         dispatch(setLoading(false))
 
+        console.log(user)
+
         if (user.errors) {
-            setError(user.errors[0])
+            setError(user.errors[0].msg)
             return
         }
 
         if (user === "userRegister") {
             dispatch(setMessage(`El usuario ya se encuentra registrado. Se envió nuevamente código de verificación a ${data.email}`));
             dispatch(setOpen(true));
-            setData({
-                name: "",
-                username: "",
-                email: "",
-                password: "",
-                passwordAgain: ""
-            })
+            
             navigate('/validate');
             return
         } else {
@@ -87,7 +83,7 @@ const Register = () => {
                 <h1>REGISTER</h1>
                 <ErrorRegister>{
                     error ?
-                        error.msg
+                        error
                         : null}
                 </ErrorRegister>
 

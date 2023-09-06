@@ -37,6 +37,12 @@ const Login = () => {
 
         if (data.user) {
             setError("")
+            setError(data.msg)
+            dispatch(setMessage('Logeado Correctamente'))
+            dispatch(logUser(data));
+            dispatch(setOpen(true));
+            navigate('/');
+            return
         }
 
         if (data.errors) {
@@ -46,15 +52,6 @@ const Login = () => {
 
         if (data.msg) {
             setError(data.msg)
-            return
-        }
-
-        else {
-            setError(data.msg)
-            dispatch(setMessage('Logeado Correctamente'))
-            dispatch(logUser(data));
-            dispatch(setOpen(true));
-            navigate('/');
             return
         }
 

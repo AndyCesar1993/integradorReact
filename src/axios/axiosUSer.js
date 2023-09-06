@@ -10,7 +10,7 @@ export const createUser = async (name, username, dateOfBirth, email, password) =
     } catch (error) {
         let userRegister = "El usuario ya se encuentra. Se envió nuevamente código de verificación a"
         let errormsg = error.response.data.errors[0].msg
-
+        
         if (errormsg.includes(userRegister)) {
             return "userRegister"
         }

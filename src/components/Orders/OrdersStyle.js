@@ -60,7 +60,19 @@ export const SpamStyle = styled.small`
     font-weight: bolder;
     padding-right: 10px;
     font-size: 13px;
+`
+
+export const InfoOrderStyle = styled.div`
+    display: flex;
+    justify-content: space-around;
+    font-weight: bolder;
+    font-size: 13px;
+    width: 100%;
     span{
         color: red;
+    }
+
+    @media (width<450px) {
+        font-size: 11px;
     }
 `

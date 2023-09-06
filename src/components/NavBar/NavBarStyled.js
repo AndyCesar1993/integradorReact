@@ -15,18 +15,19 @@ export const HeaderStyle = styled.header`
     padding:10px;
     background: ${grayDark};
     border-bottom: 0.1rem solid ${gray};
-    .menuIcon{
+`
+export const MenuIconStyle = styled.div`
         color: white;
         display: none;
+        position: relative;
         cursor: pointer;
         margin-right: 30px;
+
         @media (width <700px){
             display: flex;
         }
-    }
-
-
 `
+
 export const LogoStyle = styled.div`
     display:flex ;
     width: fit-content;
@@ -37,7 +38,7 @@ export const LogoStyle = styled.div`
     border-radius: 50%;
     padding: 15px;
     box-shadow: 2px 2px 15px 1px black;
-
+    cursor: pointer;
     h3{
         font-style: italic;
         font-weight: 400;
@@ -86,7 +87,7 @@ export const NavStyle = styled.nav`
             top: 68px; 
             left: 0;
             background: #B6B1B1 ;
-            height: 84%;
+            height: calc(100vh - 68px);
             width: 100%;
             justify-content: center;
             align-items: flex-start;

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { formatPrice } from '../../Utils/UtilsConst'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToShop } from '../../Redux/shopSlice'
+import { setMessage, setOpen } from '../../Redux/succesfulMessageSlice'
 
 const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel, color, des, id }) => {
     const [more, setMore] = useState(false);
@@ -30,6 +31,8 @@ const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel,
                 tittle: productToAdd.name,
                 img: productToAdd.img
             }))
+            dispatch(setMessage('Producto agregado al carrito'))
+            dispatch(setOpen(true));
         }
     }
 

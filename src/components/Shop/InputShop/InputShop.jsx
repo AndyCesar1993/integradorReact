@@ -51,7 +51,7 @@ const InputShop = ({ setOpenAlert }) => {
     const data = await createOrder(totalCost, shippingCost, totalPrice, shippingDetails, Shop, userToken);
 
     dispatch(setLoading(false))
-    
+
     if (data.order) {
       setOpenAlert(true)
       seterror("")
@@ -61,7 +61,6 @@ const InputShop = ({ setOpenAlert }) => {
 
     if (data.response.data.errors) {
       seterror(data.response.data.errors[0].msg)
-      console.log(error)
       return
     }
 
