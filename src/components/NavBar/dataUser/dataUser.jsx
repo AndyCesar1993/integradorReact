@@ -38,7 +38,7 @@ export default function DataUser({ setOpen, setUserData }) {
             {isLogin ?
                 <List>
                     <ListItem style={{ cursor: 'pointer' }}
-                        onClick={() => setUserData(false)}
+                        onClick={() =>{setUserData(false)}}
                     >
                         <ListItemIcon style={{ marginLeft: 'auto' }}>
                             <CloseIcon style={{ marginLeft: 'auto' }} />

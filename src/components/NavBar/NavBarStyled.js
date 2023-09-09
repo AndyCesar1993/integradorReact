@@ -62,11 +62,16 @@ export const NavStyle = styled.nav`
         margin: 0 20px;
         font-weight: 700;
         font-size: 15px;
+        
+        :focus{
+        padding: 0 0 0 5px ;
+        border-left: 4px solid white;
+        }
     }
+
     :hover{
         color: ${borderButton};
         } 
-
 
     a{
         display: flex;
@@ -75,10 +80,13 @@ export const NavStyle = styled.nav`
         align-items: center;
         text-decoration: none;
     }
+
     .CountShop{
         position:absolute;
         right:-17px;
     }
+
+
     @media (width < 700px){
         display: ${({ open }) => (open ? 'none' : 'flex')};
         ul{

@@ -65,6 +65,7 @@ export const RedesStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+
     div{
         display: flex;
         gap: 20px;

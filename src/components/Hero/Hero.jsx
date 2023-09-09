@@ -10,7 +10,6 @@ const Hero = () => {
     const renderSlides = carrouselHero.map((image) => (
         <div key={image.alt}>
             <img className="imgHero" src={image.url} alt={image.alt} />
-            <p className="legend">{image.label}</p>
         </div>
     ));
 
@@ -18,10 +17,11 @@ const Hero = () => {
         <>
             <HeroStyle>
                 <Carousel
+                    ariaLabel={false}
                     showArrows={false}
                     autoPlay={true}
                     infiniteLoop={true}
-                    dynamicHeight={true}
+                    dynamicHeight={false}
                     centerMode={true}
                     centerSlidePercentage={50}
                     className="carousel-container"

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { ProductCardDescriptionStyle, ProductCardInfoStyle, ProductCardStyle } from './ProductCardStyled'
+import { ProductCardDescriptionStyle, ProductCardInfoStyle, ProductCardStyle, ViewImgStyle } from './ProductCardStyled'
 import { Close } from '@mui/icons-material'
 import { useState } from 'react'
 import { formatPrice } from '../../Utils/UtilsConst'
@@ -9,6 +9,7 @@ import { setMessage, setOpen } from '../../Redux/succesfulMessageSlice'
 
 const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel, color, des, id }) => {
     const [more, setMore] = useState(false);
+    const [viewImg, setViewImg] = useState(false)
     const allProducts = useSelector((state) => state.products.products)
     const Shop = useSelector((state) => state.shop.cartItems)
     const dispatch = useDispatch();
@@ -18,12 +19,12 @@ const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel,
         more === false ? setMore(true) : setMore(false);
     }
 
-        const productToAdd = allProducts.find((product) => product.id === id);
-        const existProductShop = Shop.length? Shop.find((product)=>product.id===productToAdd.id):false;
+    const productToAdd = allProducts.find((product) => product.id === id);
+    const existProductShop = Shop.length ? Shop.find((product) => product.id === productToAdd.id) : false;
 
 
     const addProductToShop = () => {
-        if(!existProductShop){
+        if (!existProductShop) {
             dispatch(addToShop({
                 id: productToAdd.id,
                 price: productToAdd.price,
@@ -39,7 +40,10 @@ const ProductCard = ({ img, name, price, brand, wheels, frame, size, brake, vel,
     return (
         <ProductCardStyle>
             <ProductCardInfoStyle>
-                <img src={img} alt={name} />
+                {viewImg ?
+                    <ViewImgStyle><img src={img} alt={name} onClick={()=> setViewImg(false)}/></ViewImgStyle> :
+                    <img src={img} alt={name} onClick={()=> setViewImg(true)}/>
+                }
                 <h2>{name}</h2>
                 <Button variant="outlined" color="inherit" onClick={setMoreCard}>Más</Button>
                 <h2>$ {formatPrice(price)}</h2>

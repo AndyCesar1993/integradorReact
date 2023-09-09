@@ -41,12 +41,19 @@ const NavBar = () => {
 
                 <LoginStyle>
                     <AccountCircleIcon
-                        onClick={() => setUserData(!userData)}
+                        onClick={() => {
+                            setUserData(!userData),
+                            setOpenNav(true)
+                        }}
                     />
                 </LoginStyle>
 
-                <MenuIconStyle onClick={() => setOpenNav(!openNav)}>
-                    <MenuIcon/>
+                <MenuIconStyle onClick={() => {
+                        setOpenNav(!openNav),
+                        setUserData(false)
+                    }}
+                >
+                    <MenuIcon />
                     {ShopLength > 0 ? <CountShopStyle className='CountShop'>{ShopLength}</CountShopStyle> : <></>}
                 </MenuIconStyle>
 

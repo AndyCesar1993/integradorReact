@@ -12,7 +12,7 @@ export const carrouselHero = [
     {
         label:'Image 3',
         alt:'Lago',
-        url:'https://res.cloudinary.com/dyarz6hqx/image/upload/v1686093889/hero4_uzp54h.webp'
+        url:'https://res.cloudinary.com/dyarz6hqx/image/upload//c_thumb,w_885,h_500,g_auto/v1686093889/hero4_uzp54h.webp'
     },
     {
         label:'Image 4',
@@ -22,22 +22,22 @@ export const carrouselHero = [
     {
         label:'Image 5',
         alt:'Vintage',
-        url:'https://res.cloudinary.com/dyarz6hqx/image/upload/v1686093888/hero3_cmh2w1.jpg',
+        url:'https://res.cloudinary.com/dyarz6hqx/image/upload//c_thumb,w_885,h_500,g_auto/v1686093888/hero3_cmh2w1.jpg',
     },
     {
         label:'Image 6',
         alt:'Descenso',
-        url:'https://res.cloudinary.com/dyarz6hqx/image/upload/v1686093889/hero1_piob3d.jpg',
+        url:'https://res.cloudinary.com/dyarz6hqx/image/upload//c_thumb,w_885,h_500,g_auto/v1686093889/hero1_piob3d.jpg',
     },
     {
         label:'Image 7',
         alt:'Desierto',
-        url:'https://res.cloudinary.com/dyarz6hqx/image/upload/v1686093888/hero_lirbev.jpg',
+        url:'https://res.cloudinary.com/dyarz6hqx/image/upload//c_thumb,w_885,h_500,g_auto/v1686093888/hero_lirbev.jpg',
     },
     {
         label:'Image 8',
         alt:'Ruta',
-        url:'https://res.cloudinary.com/dyarz6hqx/image/upload/v1686093888/hero2_q82kp8.jpg',
+        url:'https://res.cloudinary.com/dyarz6hqx/image/upload//c_thumb,w_885,h_500,g_auto/v1686093888/hero2_q82kp8.jpg',
     },
     {
         label:'Image 9',

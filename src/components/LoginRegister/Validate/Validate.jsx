@@ -31,7 +31,7 @@ const Validate = () => {
 
     dispatch(setLoading(true))
 
-    const validate = await verifyUser(data.email.toLowerCase(), data.code)
+    const validate = await verifyUser(data.email.toLowerCase().trim(), data.code.trim())
 
     dispatch(setLoading(false))
 

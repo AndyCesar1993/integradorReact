@@ -9,6 +9,7 @@ export const ProductCardStyle = styled.div`
     padding: 15px;
     width: fit-content;
     gap: 10px;
+
     @media (width < 400px){
         flex-direction: column;
         gap: 0;
@@ -93,5 +94,22 @@ export const ProductCardDescriptionStyle = styled.div`
         .ButtonClose svg{
             font-size: 15px;
         }
+    }
+`
+
+export const ViewImgStyle = styled.div`
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 4;
+    backdrop-filter: blur(10px);
+
+    img{
+        transform: scale(2);
+        cursor: zoom-out;
+        border-radius: 1rem;
     }
 `

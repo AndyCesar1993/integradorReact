@@ -43,7 +43,7 @@ const Register = () => {
 
         dispatch(setLoading(true))
 
-        const user = await createUser(data.name, data.username, date, data.email.toLowerCase(), data.password)
+        const user = await createUser(data.name, data.username.trim(), date, data.email.toLowerCase().trim(), data.password)
 
         dispatch(setLoading(false))
 

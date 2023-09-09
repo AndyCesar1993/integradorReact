@@ -31,7 +31,7 @@ const Login = () => {
 
         dispatch(setLoading(true))
 
-        const data = await loginUser(user.username, user.password)
+        const data = await loginUser(user.username.trim(), user.password)
 
         dispatch(setLoading(false))
 
