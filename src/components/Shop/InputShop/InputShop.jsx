@@ -6,10 +6,9 @@ import { formatPrice } from "../../Utils/UtilsConst"
 import { countries } from "../../Utils/Countries"
 import { useNavigate } from "react-router-dom"
 import { createOrder } from "../../../axios/axiosOrder"
-import { cleanShop } from "../../Redux/shopSlice"
 import { setLoading } from "../../Redux/loadingSlice"
 
-const InputShop = ({ setOpenAlert }) => {
+const InputShop = ({ setOpenAlert, setOrderRealized }) => {
 
   let shippingCost = 15000
 
@@ -21,10 +20,9 @@ const InputShop = ({ setOpenAlert }) => {
     adress: "",
     cp: ""
   })
-
   const [error, seterror] = useState('');
-  const navigate = useNavigate();
   const [country, setCountry] = useState('');
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const totalCost = useSelector((state) => state.shop.shipingCost);
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -54,8 +52,8 @@ const InputShop = ({ setOpenAlert }) => {
 
     if (data.order) {
       setOpenAlert(true)
+      setOrderRealized(data.order)
       seterror("")
-      dispatch(cleanShop())
       return
     }
 
@@ -67,6 +65,7 @@ const InputShop = ({ setOpenAlert }) => {
   }
 
   return (
+
     /* Input Nombre */
 
     <InputShopStyle>
@@ -139,7 +138,9 @@ const InputShop = ({ setOpenAlert }) => {
         }
       >COMPRAR</Button>
     </InputShopStyle>
+
   )
 }
+
 
 export default InputShop

@@ -6,9 +6,10 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../Redux/succesfulMessageSlice";
+import { setLink, setOpen } from "../Redux/succesfulMessageSlice";
 import Animations from "../Utils/loading"
-
+import { Link } from 'react-router-dom';
+import { ArrowForward, ArrowForwardIosSharp } from '@mui/icons-material';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -18,6 +19,7 @@ const Layout = ({ children }) => {
     const dispatch = useDispatch()
     const open = useSelector((state) => state.succesfuldMessage.open);
     const message = useSelector((state) => state.succesfuldMessage.message);
+    const link = useSelector((state) => state.succesfuldMessage.link);
     const loading = useSelector((state) => state.loading.loading)
 
     const handleClose = (event, reason) => {
@@ -36,8 +38,13 @@ const Layout = ({ children }) => {
             <Footer />
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    {message}
+                    {
+                        link?
+                        <>{message} <Link color="inherit" to={link}><ArrowForward fontSize='sm'/></Link></> :
+                        message
+                    }                  
                 </Alert>
+                
             </Snackbar>
         </Stack>
     );

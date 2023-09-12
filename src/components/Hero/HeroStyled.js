@@ -10,6 +10,6 @@ export const HeroStyle = styled.div`
         width: 90%;
         border-radius: 1rem;
         margin: 40px 30px;
-        box-shadow: #E6E6EA 0 0px 5px 5px;
+        border: 2px solid #E6E6EA;
     }
 `

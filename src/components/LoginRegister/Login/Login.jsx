@@ -38,7 +38,7 @@ const Login = () => {
         if (data.user) {
             setError("")
             setError(data.msg)
-            dispatch(setMessage('Logeado Correctamente'))
+            dispatch(setMessage('Logueado Correctamente'))
             dispatch(logUser(data));
             dispatch(setOpen(true));
             navigate('/');

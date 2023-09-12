@@ -8,43 +8,53 @@ import { setMessage, setOpen } from '../../../Redux/succesfulMessageSlice';
 import InputShop from '../InputShop';
 import { forwardRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Buy from '../../Buy/Buy';
+import { cleanShop } from '../../../Redux/shopSlice'
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AlertDialogSlide() {
+    const [orderRealized, setOrderRealized] = useState([])
     const [openAlert, setOpenAlert] = useState(false);
+    const [orderOk, setOrderOk] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
     const handleClose = (state) => {
-        if(state){
+        if (state) {
             dispatch(setMessage('Compra realizada exitosamente!'))
             dispatch(setOpen(true))
             setOpenAlert(false)
-            navigate('/')
-        }else setOpenAlert(false)
+            dispatch(cleanShop())
+            setOrderOk(true)
+        } else setOpenAlert(false)
     }
 
     return (
-        <div>
-            <InputShop setOpenAlert={setOpenAlert}/>
-            <Dialog
-                open={openAlert}
-                TransitionComponent={Transition}
-                keepMounted
-                style={{zIndex:'2'}}
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle>{"¿Desea completar la compra?"}</DialogTitle>
-                <DialogActions>
-                    <Button onClick={()=>handleClose(true)}>Continuar</Button>
-                    <Button onClick={()=>handleClose(false)}>Cancelar</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        orderOk ?
+
+            <Buy order={orderRealized} /> :
+
+            <div>
+
+                <InputShop setOpenAlert={setOpenAlert} setOrderRealized={setOrderRealized} />
+                <Dialog
+                    open={openAlert}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    style={{ zIndex: '2' }}
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle>{"¿Desea completar la compra?"}</DialogTitle>
+                    <DialogActions>
+                        <Button onClick={() => handleClose(true)}>Continuar</Button>
+                        <Button onClick={() => handleClose(false)}>Cancelar</Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
     );
 }

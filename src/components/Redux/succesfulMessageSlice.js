@@ -5,6 +5,7 @@ const initialState={
     message:'',
     openAlert:false,
     alert:false,
+    link:''
 }
 
 const succesfulMessageSlice = createSlice({
@@ -17,15 +18,19 @@ const succesfulMessageSlice = createSlice({
         },
         setMessage:(state,action)=>{
             state.message = action.payload
+            state.link = ''
         },
         setOpenAlert:(state,action)=>{
             state.openAlert = action.payload
         },
         setAlert:(state,action)=>{
             state.alert=action.payload
+        },
+        setLink:(state,action)=>{
+            state.link = action.payload
         }
     }
 })
 
-export const{getSuccesfuldMessage,setOpen,setMessage,setOpenAlert,setAlert}= succesfulMessageSlice.actions;
+export const{getSuccesfuldMessage,setOpen,setMessage,setOpenAlert,setAlert,setLink}= succesfulMessageSlice.actions;
 export default succesfulMessageSlice.reducer
