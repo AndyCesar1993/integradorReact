@@ -31,7 +31,6 @@ export const BuyContainer = styled.div`
             @media (width < 720px) {
                 flex-direction: column;
                 gap: 5px;
-                align-items: flex-start;
             }
         }
         thead{

@@ -8,7 +8,6 @@ const AboutUs = () => {
     const renderSlides = carrouselAboutUs.map((image) => (
         <div key={image.alt}>
             <img src={image.url} alt={image.alt} />
-            <p className="legend">{image.alt}</p>
         </div>
     ));
 
@@ -21,7 +20,6 @@ const AboutUs = () => {
                     autoPlay={true}
                     infiniteLoop={true}
                     centerMode={true}
-                    className="carousel-container"
                 >
                     {renderSlides}
                 </Carousel>

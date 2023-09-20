@@ -4,6 +4,8 @@ export const gray = '#C7C7C7'
 
 export const grayDark = '#343A40'
 
+export const blueGray = '#455A64'
+
 export const textGray = '#909294'
 
 export const buttonColor = '#212529'

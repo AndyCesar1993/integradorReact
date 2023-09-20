@@ -8,6 +8,11 @@ export const AboutUsStyle = styled.div`
     .AboutUsImg{
         width: 45%;
     }
+
+    .slide img{
+        width: 30%;
+    }
+
     @media (width < 770px){
         flex-direction: column-reverse;
         align-items: center;
@@ -30,7 +35,7 @@ export const AbouUsInfoStyle = styled.div`
     gap: 20px;
     p{
         font-weight: 400;
-        font-size: 20px;
+        font-size: 1rem;
         text-align: center;
     }
     @media (width< 770px){

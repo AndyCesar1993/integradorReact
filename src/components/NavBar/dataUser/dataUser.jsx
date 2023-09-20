@@ -45,17 +45,14 @@ export default function DataUser({ setOpen, setUserData }) {
                         </ListItemIcon>
                     </ListItem>
 
-                    <ListItem disablePadding>
-                        <PersonIcon />
-                        <ListItemButton>
-                            <ListItemText primary={username} />
-                        </ListItemButton>
+                    <ListItem disablePadding style={{textAlign:'center'}}>
+                        <ListItemText>Hola {username.toUpperCase()}! 🙂</ListItemText>
                     </ListItem>
 
                     <Divider />
 
                     <ListItem disablePadding>
-                        <PortraitIcon />
+                    <PersonIcon />
                         <ListItemButton>
                             <ListItemText primary={name} />
                         </ListItemButton>
