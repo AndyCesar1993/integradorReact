@@ -15,11 +15,8 @@ const Orders = () => {
     const navigate = useNavigate()
 
 
-    if (!isLogin) {
-        useEffect(() => {
-            navigate('/login')
-        })
-        return
+    if(!isLogin){
+            navigate('/')
     }
 
     return (
